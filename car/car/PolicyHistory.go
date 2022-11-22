@@ -41,9 +41,16 @@ func AddPolicy(policyCreated *PolicyCreated) {
 	policyApplied := NewPolicyApplied()
 	model.Copy(policyApplied, policyHistory)
 	Publish(policyApplied)
+<<<<<<< HEAD
 	// policyDenied := NewPolicyDenied()
 	// model.Copy(policyDenied, self)
 	// Publish(policyDenied)
+=======
+	policyDenied := NewPolicyDenied()
+	model.Copy(policyDenied, policyHistory)
+	Publish(policyDenied)
+	*/
+>>>>>>> origin/template
 
 	/** Example 2:  finding and process
 	id, _ := strconv.ParseInt(policyCreated.id, 10, 64)
