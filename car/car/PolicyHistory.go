@@ -42,10 +42,10 @@ func AddPolicy(policyCreated *PolicyCreated){
 	policyHistoryrepository.save(policyHistory)
 
 	policyApplied := NewPolicyApplied()
-	model.Copy(policyApplied, addPolicy)
+	model.Copy(policyApplied, policyHistory)
 	Publish(policyApplied)
 	policyDenied := NewPolicyDenied()
-	model.Copy(policyDenied, addPolicy)
+	model.Copy(policyDenied, policyHistory)
 	Publish(policyDenied)
 	*/
 
