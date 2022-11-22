@@ -10,16 +10,15 @@
         </template>
 
         <v-card-title v-if="value._links">
-            PolicyHistory # {{value._links.self.href.split("/")[value._links.self.href.split("/").length - 1]}}
+            PolicyApplication # {{value._links.self.href.split("/")[value._links.self.href.split("/").length - 1]}}
         </v-card-title >
         <v-card-title v-else>
-            PolicyHistory
+            PolicyApplication
         </v-card-title >
 
         <v-card-text>
-            <Number label="CarId" v-model="value.carId" :editMode="editMode"/>
-            <Number label="PolicyApplicationId" v-model="value.policyApplicationId" :editMode="editMode"/>
-            <String label="Status" v-model="value.status" :editMode="editMode"/>
+            <String label="PolicyId" v-model="value.policyId" :editMode="editMode"/>
+            <String label="CarId" v-model="value.carId" :editMode="editMode"/>
         </v-card-text>
 
         <v-card-actions>
@@ -38,7 +37,7 @@
                     @click="save"
                     v-else
             >
-                Save
+                Apply
             </v-btn>
             <v-btn
                     color="deep-purple lighten-2"
@@ -58,7 +57,7 @@
             </v-btn>
         </v-card-actions>
         <v-card-actions>
-            <v-spacer></v-spacer>                        
+            <v-spacer></v-spacer>
         </v-card-actions>
 
         <v-snackbar
@@ -81,7 +80,7 @@
 
 
     export default {
-        name: 'PolicyHistory',
+        name: 'PolicyApplication',
         components:{
         },
         props: {
@@ -97,7 +96,7 @@
                 text: ''
             },
         }),
-        created(){
+        computed:{
         },
         methods: {
             selectFile(){
@@ -133,7 +132,7 @@
 
                     if(!this.offline) {
                         if(this.isNew) {
-                            temp = await axios.post(axios.fixUrl('/policyHistories'), this.value)
+                            temp = await axios.post(axios.fixUrl('/policyApplications'), this.value)
                         } else {
                             temp = await axios.put(axios.fixUrl(this.value._links.self.href), this.value)
                         }
