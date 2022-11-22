@@ -40,7 +40,6 @@ public class PolicyApplication  {
     @PostPersist
     public void onPostPersist(){
 
-
         PolicyCreated policyCreated = new PolicyCreated(this);
         policyCreated.publishAfterCommit();
 
