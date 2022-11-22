@@ -31,7 +31,7 @@
                         </v-fab-transition>
                     </template>
 
-                    <PolicyHistory :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" @add="append" v-if="tick"/>
+                    <PolicyApplication :offline="offline" class="video-card" :isNew="true" :editMode="true" v-model="newValue" @add="append" v-if="tick"/>
                 
                     <v-btn
                             style="postition:absolute; top:2%; right:2%"
@@ -50,12 +50,12 @@
 
 <script>
     const axios = require('axios').default;
-    import PolicyHistory from './../PolicyHistory.vue';
+    import PolicyApplication from './../PolicyApplication.vue';
 
     export default {
-        name: 'PolicyHistoryManager',
+        name: 'PolicyApplicationManager',
         components: {
-            PolicyHistory,
+            PolicyApplication,
         },
         props: {
             offline: Boolean,
@@ -67,11 +67,10 @@
             headers: 
                 [
                     { text: "id", value: "id" },
+                    { text: "policyId", value: "policyId" },
                     { text: "carId", value: "carId" },
-                    { text: "policyApplicationId", value: "policyApplicationId" },
-                    { text: "status", value: "status" },
                 ],
-            policyHistory : [],
+            policyApplication : [],
             newValue: {},
             tick : true,
             openDialog : false,
@@ -82,14 +81,13 @@
                 return;
             }
 
-            var temp = await axios.get(axios.fixUrl('/policyhistories'))
-            temp.data._embedded.policyhistories.map(obj => obj.id=obj._links.self.href.split("/")[obj._links.self.href.split("/").length - 1])
-            this.values = temp.data._embedded.policyhistories;
+            var temp = await axios.get(axios.fixUrl('/policyapplications'))
+            temp.data._embedded.policyapplications.map(obj => obj.id=obj._links.self.href.split("/")[obj._links.self.href.split("/").length - 1])
+            this.values = temp.data._embedded.policyapplications;
 
             this.newValue = {
-                'carId': 0,
-                'policyApplicationId': 0,
-                'status': '',
+                'policyId': '',
+                'carId': '',
             }
         },
         methods: {

@@ -1,18 +1,15 @@
 <template>
     <v-card outlined>
         <v-card-title>
-            PolicyHistory # {{item._links.self.href.split("/")[item._links.self.href.split("/").length - 1]}}
+            PolicyApplication # {{item._links.self.href.split("/")[item._links.self.href.split("/").length - 1]}}
         </v-card-title>
 
         <v-card-text>
             <div>
-                <Number label="CarId" v-model="item.carId" :editMode="editMode" @change="change" />
+                <String label="PolicyId" v-model="item.policyId" :editMode="editMode" @change="change" />
             </div>
             <div>
-                <Number label="PolicyApplicationId" v-model="item.policyApplicationId" :editMode="editMode" @change="change" />
-            </div>
-            <div>
-                <String label="Status" v-model="item.status" :editMode="editMode" @change="change" />
+                <String label="CarId" v-model="item.carId" :editMode="editMode" @change="change" />
             </div>
         </v-card-text>
 
@@ -60,7 +57,7 @@
     const axios = require('axios').default;
 
     export default {
-        name: 'PolicyHistoryDetail',
+        name: 'PolicyApplicationDetail',
         components:{},
         props: {
         },
@@ -71,7 +68,7 @@
         async created() {
             var me = this;
             var params = this.$route.params;
-            var temp = await axios.get(axios.fixUrl('/policyHistories/' + params.id))
+            var temp = await axios.get(axios.fixUrl('/policyApplications/' + params.id))
             if(temp.data) {
                 me.item = temp.data
             }
